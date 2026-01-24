@@ -1,0 +1,179 @@
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.data-visualization.data-v-98b81aa6 {
+  padding: 20rpx;
+  background: linear-gradient(180deg, #f5f7fa 0%, #ffffff 100%);
+  min-height: 100vh;
+}
+.header.data-v-98b81aa6 {
+  margin-bottom: 30rpx;
+  padding: 0 10rpx;
+}
+.header .title.data-v-98b81aa6 {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+}
+.chart-container.data-v-98b81aa6 {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx 20rpx;
+  margin-bottom: 30rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+}
+.chart-header.data-v-98b81aa6 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+.chart-header .chart-title.data-v-98b81aa6 {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+.chart-header .chart-time-selector.data-v-98b81aa6 {
+  display: flex;
+  background: #f0f2f5;
+  border-radius: 30rpx;
+  padding: 4rpx;
+}
+.chart-header .chart-time-selector .time-option.data-v-98b81aa6 {
+  padding: 10rpx 24rpx;
+  font-size: 26rpx;
+  color: #666;
+  border-radius: 30rpx;
+  transition: all 0.3s;
+}
+.chart-header .chart-time-selector .time-option.active.data-v-98b81aa6 {
+  background: #fff;
+  color: #1890ff;
+  font-weight: 500;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+.stats-card.data-v-98b81aa6 {
+  display: flex;
+  justify-content: space-between;
+  background: #f8f9fa;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+}
+.stats-card .stat-item.data-v-98b81aa6 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+.stats-card .stat-item .stat-label.data-v-98b81aa6 {
+  font-size: 22rpx;
+  color: #666;
+  margin-bottom: 8rpx;
+  text-align: center;
+}
+.stats-card .stat-item .stat-value.data-v-98b81aa6 {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #1890ff;
+}
+.chart-scroll-wrapper.data-v-98b81aa6 {
+  width: 100%;
+  height: 400rpx;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+.chart-scroll-wrapper .chart-wrapper.data-v-98b81aa6 {
+  height: 100%;
+}
+.week-chart.data-v-98b81aa6 {
+  width: 100%;
+  height: 400rpx;
+}
+.x-axis-labels.data-v-98b81aa6 {
+  display: flex;
+  margin-top: 10rpx;
+  overflow-x: hidden;
+}
+.x-axis-labels .x-axis-label.data-v-98b81aa6 {
+  font-size: 22rpx;
+  color: #999;
+  text-align: center;
+  flex-shrink: 0;
+  padding: 0 4rpx;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.data-v-98b81aa6::-webkit-scrollbar {
+  height: 8rpx;
+}
+.data-v-98b81aa6::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4rpx;
+}
+.data-v-98b81aa6::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4rpx;
+}
+.data-v-98b81aa6::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+.tip-text.data-v-98b81aa6 {
+  text-align: center;
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 10rpx;
+}
+@media (max-width: 750px) {
+.chart-wrapper.data-v-98b81aa6,
+.week-chart.data-v-98b81aa6 {
+    height: 350rpx !important;
+}
+.stat-value.data-v-98b81aa6 {
+    font-size: 24rpx !important;
+}
+.stat-label.data-v-98b81aa6 {
+    font-size: 20rpx !important;
+}
+.x-axis-label.data-v-98b81aa6 {
+    font-size: 20rpx !important;
+    padding: 0 2rpx !important;
+}
+.chart-time-selector .time-option.data-v-98b81aa6 {
+    padding: 8rpx 16rpx !important;
+    font-size: 24rpx !important;
+}
+}
+.unit.data-v-98b81aa6 {
+  text-align: right;
+  /* 右对齐 */
+  color: gray;
+  /* 灰色文字 */
+  font-size: 6rpx;
+}

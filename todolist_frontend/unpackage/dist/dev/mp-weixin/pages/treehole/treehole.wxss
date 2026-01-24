@@ -1,0 +1,199 @@
+
+/* 使用uniapp的安全区域CSS类 */
+.container.safe-area.data-v-2b7b037f {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* 专门为底部元素设置 */
+.loading-layout.safe-area-bottom.data-v-2b7b037f {
+  margin-bottom: constant(safe-area-inset-bottom);
+  margin-bottom: env(safe-area-inset-bottom);
+}
+
+/* 或者调整整体布局 */
+.container.data-v-2b7b037f {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-bottom: calc(100rpx + constant(safe-area-inset-bottom));
+  padding-bottom: calc(100rpx + env(safe-area-inset-bottom));
+  background-color: #f5f5f5;
+}
+.loadingLayout.data-v-2b7b037f{
+	background-color: #f5f5f5;
+	/* margin-bottom: -200rpx; */
+}
+
+/* .container {
+  padding-bottom: 120rpx;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f5f5f5;
+} */
+
+/* 分类条样式 */
+.category-scroll.data-v-2b7b037f {
+  white-space: nowrap;
+  padding: 10rpx 0;
+  background-color: #ffffff;
+  border-bottom: 1rpx solid #e5e5e5;
+}
+.category-item.data-v-2b7b037f {
+  height: auto;
+  display: inline-block;
+  padding: 6rpx 16rpx;
+  margin: 0 8rpx;
+  font-size: 14rpx;
+  color: #666;
+  border-radius: 16rpx;
+  background-color: #f0f0f0;
+  transition: all 0.3s;
+}
+.category-item.active.data-v-2b7b037f {
+  background-color: #007aff;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+/* 帖子列表样式 */
+.post-list.data-v-2b7b037f {
+  background-color: #f5f5f5;
+  padding-bottom: 500rpx;
+  flex: 1;
+  padding: 10rpx;
+}
+.post-item.data-v-2b7b037f {
+  background-color: #ffffff;
+  border-radius: 12rpx;
+  padding: 16rpx;
+  margin-bottom: 12rpx;
+  margin-right: 40rpx;
+  margin-left: 20rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+}
+
+/* 帖子头部 */
+.post-header.data-v-2b7b037f {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+.user-avatar.data-v-2b7b037f {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  margin-right: 12rpx;
+}
+.user-info.data-v-2b7b037f {
+  flex: 1;
+}
+.user-name.data-v-2b7b037f {
+  font-size: 16rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 4rpx;
+}
+.post-meta.data-v-2b7b037f {
+  display: flex;
+  align-items: center;
+  font-size: 12rpx;
+  color: #999;
+}
+.post-category.data-v-2b7b037f {
+  background-color: #f0f0f0;
+  padding: 2rpx 8rpx;
+  border-radius: 10rpx;
+  margin-right: 8rpx;
+}
+
+/* 帖子内容 */
+.post-content.data-v-2b7b037f {
+  margin-bottom: 16rpx;
+}
+.content-text.data-v-2b7b037f {
+  font-size: 15rpx;
+  line-height: 1.5;
+  color: #333;
+  display: block;
+  margin-bottom: 12rpx;
+  margin-left: 52rpx;
+}
+.post-images.data-v-2b7b037f {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8rpx;
+}
+.content-image.data-v-2b7b037f {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 8rpx;
+  background-color: #f0f0f0;
+}
+
+/* 帖子操作栏 */
+.post-actions.data-v-2b7b037f {
+  display: flex;
+  justify-content: space-around;
+  border-top: 1rpx solid #f0f0f0;
+  padding-top: 12rpx;
+}
+.action-item.data-v-2b7b037f {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  padding: 6rpx 0;
+}
+.action-icon.data-v-2b7b037f {
+  width: 20rpx;
+  height: 20rpx;
+  margin-right: 6rpx;
+}
+.action-text.data-v-2b7b037f {
+  font-size: 14rpx;
+  color: #666;
+}
+.action-text.liked.data-v-2b7b037f {
+  color: #ff3b30;
+}
+
+/* 加载更多 */
+.no-more.data-v-2b7b037f {
+  text-align: center;
+  padding: 20rpx;
+  font-size: 14rpx;
+  color: #999;
+}
+.load-more.data-v-2b7b037f {
+  background-color: #ffffff;
+  border-radius: 8rpx;
+  /* margin-top: 10rpx; */
+}
+
+/* 发布按钮样式 */
+.publish-btn.data-v-2b7b037f {
+  color: white;
+  position: fixed;
+  right: 30rpx;
+  bottom: 120rpx; /* 留出底部安全距离 */
+  width: 100rpx;
+  height: 100rpx;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  transition: all 0.3s;
+}
+.publish-btn.data-v-2b7b037f:active {
+  transform: scale(0.95);
+  box-shadow: 0 4rpx 12rpx rgba(0, 122, 255, 0.6);
+}
+.publish-icon.data-v-2b7b037f {
+  width: 50rpx;
+  height: 50rpx;
+  filter: brightness(0) invert(1); /* 使图标变为白色 */
+}

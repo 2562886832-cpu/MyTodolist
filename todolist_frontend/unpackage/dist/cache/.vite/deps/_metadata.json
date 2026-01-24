@@ -1,0 +1,46 @@
+{
+  "hash": "30e89915",
+  "configHash": "5d84a938",
+  "lockfileHash": "f71097c9",
+  "browserHash": "f07bce35",
+  "optimized": {
+    "echarts/charts": {
+      "src": "../../../../../node_modules/echarts/charts.js",
+      "file": "echarts_charts.js",
+      "fileHash": "74b6d02f",
+      "needsInterop": false
+    },
+    "echarts/components": {
+      "src": "../../../../../node_modules/echarts/components.js",
+      "file": "echarts_components.js",
+      "fileHash": "ddced6e2",
+      "needsInterop": false
+    },
+    "echarts/core": {
+      "src": "../../../../../node_modules/echarts/core.js",
+      "file": "echarts_core.js",
+      "fileHash": "d4f5e304",
+      "needsInterop": false
+    },
+    "echarts/renderers": {
+      "src": "../../../../../node_modules/echarts/renderers.js",
+      "file": "echarts_renderers.js",
+      "fileHash": "e9751c91",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-LYHA5RCN": {
+      "file": "chunk-LYHA5RCN.js"
+    },
+    "chunk-LMYTYXTZ": {
+      "file": "chunk-LMYTYXTZ.js"
+    },
+    "chunk-OIYIHTDL": {
+      "file": "chunk-OIYIHTDL.js"
+    },
+    "chunk-E7ROHS4A": {
+      "file": "chunk-E7ROHS4A.js"
+    }
+  }
+}

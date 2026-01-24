@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "uni-app",
+  "usingComponents": {
+    "list-form": "../../components/listForm/listForm",
+    "alter-form": "../../components/alterForm/alterForm"
+  }
+}

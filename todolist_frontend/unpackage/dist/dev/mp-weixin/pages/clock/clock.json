@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "时钟",
+  "usingComponents": {
+    "alter-form": "../../components/alterForm/alterForm",
+    "list-form": "../../components/listForm/listForm"
+  }
+}

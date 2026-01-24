@@ -1,0 +1,388 @@
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+
+/* 帖子内容区域 */
+.post-section {
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  z-index: 10;
+}
+.post-content-card {
+  padding: 20rpx 30rpx;
+  background-color: #ffffff;
+  box-shadow: 0 6rpx 12rpx rgba(0, 0, 0, 0.08);
+}
+
+/* 帖子操作栏 */
+.post-actions {
+  display: flex;
+  position: relative;
+  justify-content: space-around;
+  padding: 20rpx 0;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+/* 帖子头部样式 */
+.post-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+.user-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+.user-info {
+  flex: 1;
+}
+.user-name {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+.post-meta {
+  display: flex;
+  align-items: center;
+}
+.post-category {
+  font-size: 24rpx;
+  color: #1890ff;
+  background-color: #e6f7ff;
+  padding: 4rpx 12rpx;
+  border-radius: 20rpx;
+  margin-right: 16rpx;
+}
+.post-time {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 帖子内容样式 */
+.post-content {
+  margin-bottom: 30rpx;
+}
+.content-text {
+  font-size: 30rpx;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+.post-images {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -5rpx;
+}
+.content-image {
+  width: calc(33.33% - 10rpx);
+  height: 180rpx;
+  margin: 5rpx;
+  border-radius: 8rpx;
+}
+.action-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.action-icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-bottom: 8rpx;
+}
+.action-text {
+  font-size: 24rpx;
+  color: #666;
+}
+.action-text.liked {
+  color: #ff6b6b;
+}
+
+/* 评论区域 */
+.comment-section {
+  flex: 1;
+  background-color: #f5f5f5;
+  margin-top: 10rpx;
+  border-radius: 20rpx 20rpx 0 0;
+}
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+.comment-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+.comment-sort {
+  display: flex;
+}
+.sort-item {
+  font-size: 26rpx;
+  color: #999;
+  margin-left: 30rpx;
+  padding: 8rpx 16rpx;
+  border-radius: 20rpx;
+}
+.sort-item.active {
+  color: #1890ff;
+  background-color: #e6f7ff;
+}
+
+/* 评论列表 */
+.comment-list {
+  padding-left: 20rpx;
+}
+.comment-item {
+  display: flex;
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #f9f9f9;
+}
+.comment-avatar {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+.sub-comment-avatar {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.comment-content {
+  flex: 1;
+}
+.comment-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+.sub-comment-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+.sub-comment-info .left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.comment-name {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333;
+}
+.comment-time {
+  font-size: 24rpx;
+  color: #999;
+}
+.sub-comment-time {
+  font-size: 24rpx;
+  color: #999;
+}
+.comment-text {
+  font-size: 28rpx;
+  line-height: 1.5;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+.comment-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12rpx;
+  padding-right: 30rpx;
+}
+.sub-comment-actions {
+  margin-left: 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12rpx;
+  padding-left: 64rpx;
+}
+.comment-like {
+  display: flex;
+  align-items: center;
+  margin-right: 40rpx;
+}
+.comment-like-icon {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 10rpx;
+}
+.comment-more-icon {
+  width: 32rpx;
+  height: 32rpx;
+  margin-left: 10rpx;
+}
+.comment-like-count {
+  font-size: 24rpx;
+  color: #999;
+}
+.comment-reply {
+  margin-right: 30rpx;
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 子评论 */
+.sub-comments {
+  padding: 20rpx;
+  background-color: #f9f9f9;
+  border-radius: 12rpx;
+}
+.sub-comment-item {
+  border-bottom: 1rpx solid #f0f0f0;
+}
+.sub-comment-item:last-child {
+  border-bottom: none;
+}
+.sub-comment-content {
+  margin-left: 10rpx;
+  padding-left: 64rpx;
+  font-size: 26rpx;
+  line-height: 1.4;
+  color: #666;
+  margin-bottom: 12rpx;
+}
+.sub-comment-name {
+  margin-left: 10rpx;
+  color: #1890ff;
+}
+.sub-comment-target {
+  color: #1890ff;
+}
+.sub-comment-like {
+  display: flex;
+  align-items: center;
+  margin-right: 30rpx;
+}
+.sub-comment-like-icon {
+  width: 28rpx;
+  height: 28rpx;
+  margin-right: 8rpx;
+}
+.sub-comment-like-count {
+  font-size: 22rpx;
+  color: #999;
+}
+.sub-comment-reply {
+  font-size: 22rpx;
+  color: #999;
+}
+.view-more-replies {
+  text-align: center;
+  padding: 15rpx;
+  color: #1890ff;
+  font-size: 26rpx;
+}
+
+/* 加载更多 */
+.load-more, .no-more {
+  text-align: center;
+  padding: 40rpx 0;
+}
+.load-more-text {
+  font-size: 28rpx;
+  color: #1890ff;
+}
+.no-more-text {
+  font-size: 26rpx;
+  color: #999;
+}
+
+/* 底部评论输入框 */
+.comment-input-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border-top: 1rpx solid #f0f0f0;
+  padding: 20rpx 30rpx;
+  z-index: 100;
+}
+.comment-input-wrapper {
+  display: flex;
+  align-items: center;
+  background-color: #f5f5f5;
+  border-radius: 15rpx;
+  padding: 10rpx 20rpx;
+}
+.comment-input {
+  flex: 1;
+  font-size: 28rpx;
+  height: 60rpx;
+  padding: 0 20rpx;
+}
+.input-actions {
+  display: flex;
+  align-items: center;
+}
+.emoji-icon {
+  width: 44rpx;
+  height: 44rpx;
+  margin-right: 20rpx;
+}
+.send-btn {
+  font-size: 28rpx;
+  color: #ccc;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+}
+.send-btn.active {
+  color: #1890ff;
+}
+.send-btn:after {
+  border: none;
+}
+.loadingLayout {
+  background-color: #f5f5f5;
+  /* margin-bottom: -200rpx; */
+}
+.simpleReply {
+  color: gray;
+  padding-bottom: 10rpx;
+}

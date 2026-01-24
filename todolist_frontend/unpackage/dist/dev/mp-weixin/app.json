@@ -1,0 +1,46 @@
+{
+  "pages": [
+    "pages/panel/panel",
+    "pages/data/data",
+    "pages/mine/mine",
+    "pages/clock/clock",
+    "pages/treehole/treehole",
+    "pages/test/test",
+    "pages/post/create",
+    "pages/mine/minePost",
+    "pages/post/postDetail"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "text": "日历",
+        "pagePath": "pages/panel/panel",
+        "iconPath": "/static/icons/menu.png",
+        "selectedIconPath": "/static/icons/menu-.png"
+      },
+      {
+        "text": "时钟",
+        "pagePath": "pages/clock/clock"
+      },
+      {
+        "text": "树洞",
+        "pagePath": "pages/treehole/treehole"
+      },
+      {
+        "text": "数据",
+        "pagePath": "pages/data/data"
+      },
+      {
+        "text": "我的",
+        "pagePath": "pages/mine/mine"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

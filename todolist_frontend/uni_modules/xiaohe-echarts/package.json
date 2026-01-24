@@ -1,0 +1,105 @@
+{
+  "id": "xiaohe-echarts",
+  "name": "uni-echarts",
+  "displayName": "xiaohe-echarts",
+  "type": "module",
+  "version": "2.4.1",
+  "description": "适用于 uni-app 的 ECharts 组件，支持 Web、小程序、APP，支持鸿蒙，支持 TypeScript。与 Vue ECharts 近乎一致的使用体验！",
+  "author": "xiaohe0601 <xiaohe0601@outlook.com>",
+  "license": "MIT",
+  "homepage": "https://uni-echarts.xiaohe.ink",
+  "repository": "https://github.com/xiaohe0601/uni-echarts",
+  "bugs": "https://github.com/xiaohe0601/uni-echarts/issues",
+  "keywords": [
+    "echarts",
+    "vue-echarts",
+    "uni-echarts"
+],
+  "dcloudext": {
+    "type": "component-vue",
+    "sale": {
+      "regular": {
+        "price": "0.00"
+      },
+      "sourcecode": {
+        "price": "0.00"
+      }
+    },
+    "contact": {
+      "qq": ""
+    },
+    "declaration": {
+      "ads": "无",
+      "data": "无",
+      "permissions": "无"
+    },
+    "npmurl": "https://www.npmjs.com/package/uni-echarts",
+    "darkmode": "√",
+    "i18n": "√",
+    "widescreen": "√"
+  },
+  "uni_modules": {
+    "dependencies": [],
+    "encrypt": [],
+    "platforms": {
+      "client": {
+        "uni-app": {
+          "vue": {
+            "vue2": "x",
+            "vue3": "√"
+          },
+          "web": {
+            "safari": "√",
+            "chrome": "√"
+          },
+          "app": {
+            "vue": "√",
+            "nvue": "x",
+            "android": "√",
+            "ios": "√",
+            "harmony": "√"
+          },
+          "mp": {
+            "weixin": "√",
+            "alipay": "√",
+            "toutiao": "√",
+            "baidu": "√",
+            "kuaishou": "√",
+            "jd": "√",
+            "harmony": "√",
+            "qq": "√",
+            "lark": "√"
+          },
+          "quickapp": {
+            "huawei": "√",
+            "union": "√"
+          }
+        },
+        "uni-app-x": {
+          "web": {
+            "safari": "x",
+            "chrome": "x"
+          },
+          "app": {
+            "android": "x",
+            "ios": "x",
+            "harmony": "x"
+          },
+          "mp": {
+            "weixin": "x"
+          }
+        }
+      },
+      "cloud": {
+        "aliyun": "√",
+        "tcb": "√",
+        "alipay": "√"
+      }
+    }
+},
+"engines": {
+    "HBuilderX": "^3.1.0",
+    "uni-app": "^3.6.15",
+    "uni-app-x": "^3.6.15"
+}
+}

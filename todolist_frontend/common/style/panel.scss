@@ -1,0 +1,633 @@
+
+.schedule-dot {
+  position: absolute;
+  top: 50;
+  right: 0;
+  width: 6px;
+  height: 6px;
+  background-color: #c3cfe2; /* 红色小点，可根据需要调整 */
+  border-radius: 50%;
+  z-index: 2;
+}
+	
+.small-text {
+  font-size: 12px; /* 调整字体大小 */
+  //transform: scale(0.6);
+  color: blue; /* 可选：设置字体颜色 */
+  overflow: hidden; /* 防止文字溢出 */
+  white-space: nowrap; /* 防止文字换行 */
+  z-index: 1;
+}	
+
+.year-selector {
+  display: flex;
+  flex-direction: row; /* 水平排列 */
+  align-items: center; /* 垂直居中 */
+  justify-content: space-between; /* 均匀分布 */
+  width: 100%;
+}
+
+.calendar-container {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  // background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 20rpx;
+  box-sizing: border-box;
+  padding-bottom: 150rpx;
+}
+
+page {
+  background: #e8ecf2;
+}
+/* 年份月份选择器 */
+.year-month-selector {
+  background: white;
+  border-radius: 20rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 5rpx 15rpx rgba(0,0,0,0.1);
+}
+
+.selector-btn {
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  color: #4a90e2;
+  border-radius: 50%;
+  background: #f0f7ff;
+  transition: all 0.2s;
+}
+
+.selector-btn:active {
+  background: #e1f0ff;
+  transform: scale(0.95);
+}
+
+.year-display {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  margin: 10rpx 0;
+  text-align: center;
+}
+
+.month-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30rpx;
+  margin: 20rpx 0;
+}
+
+.month-display {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #4a90e2;
+  min-width: 120rpx;
+  text-align: center;
+}
+
+.quick-actions {
+  display: flex;
+  justify-content: center;
+  gap: 20rpx;
+  margin-top: 20rpx;
+}
+
+.quick-btn {
+  padding: 15rpx 30rpx;
+  background: #4a90e2;
+  color: white;
+  border-radius: 50rpx;
+  font-size: 28rpx;
+  transition: all 0.2s;
+}
+
+.quick-btn:active {
+  background: #3a80d2;
+  transform: scale(0.95);
+}
+
+/* 年视图 */
+.year-view {
+  background: white;
+  border-radius: 20rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 5rpx 15rpx rgba(0,0,0,0.1);
+}
+
+.year-months {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20rpx;
+}
+
+.month-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30rpx 20rpx;
+  border-radius: 15rpx;
+  background: #f8fafc;
+  border: 2rpx solid #e2e8f0;
+  transition: all 0.3s;
+}
+
+.month-item.current-month {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-color: #667eea;
+  transform: translateY(-5rpx);
+  box-shadow: 0 10rpx 20rpx rgba(102, 126, 234, 0.3);
+}
+
+.month-item:active {
+  transform: scale(0.95);
+}
+
+.month-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+
+.month-days {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.month-item.current-month .month-days {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* 日历主体 */
+.calendar {
+  height: 800rpx;
+  background: white;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  box-shadow: 0 10rpx 30rpx rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, height 0.3s ease;
+}
+
+.week-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 20rpx;
+}
+
+.week-day {
+  text-align: center;
+  font-size: 28rpx;
+  color: #666;
+  padding: 10rpx 0;
+  font-weight: 500;
+}
+
+.week-day:nth-child(1), .week-day:nth-child(7) {
+  color: #ff6b6b;
+}
+
+.date-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  transition: row-gap 0.3s ease, height 0.3s ease;
+}
+
+.date-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100rpx;
+  position: relative;
+  border-radius: 15rpx;
+  margin: 5rpx;
+  transition: all 0.2s;
+}
+
+.date-cell:active {
+  background: #f0f7ff;
+}
+
+.date-number {
+  font-size: 32rpx;
+  color: #333;
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+  position: relative;
+  z-index: 1;
+}
+
+/* 非当前月份的日期 */
+.date-cell.other-month .date-number {
+  color: #ccc;
+}
+
+/* 周末日期 */
+.date-cell.weekend .date-number {
+  color: #ff6b6b;
+}
+
+/* 今天日期 */
+.today-indicator {
+  position: absolute;
+  top: 5rpx;
+  right: 5rpx;
+  background: #4a90e2;
+  color: white;
+  font-size: 20rpx;
+  padding: 2rpx 6rpx;
+  border-radius: 10rpx;
+  z-index: 3;
+}
+
+.date-cell.today .date-number {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 5rpx 15rpx rgba(102, 126, 234, 0.4);
+}
+
+/* 选中日期 */
+.date-cell.selected .date-number {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 5rpx 15rpx rgba(255, 107, 107, 0.4);
+}
+
+/* 有备注的日期 */
+.note-indicator {
+  position: absolute;
+  bottom: 15rpx;
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  z-index: 1;
+}
+
+/* 农历信息 */
+.lunar-text {
+  font-size: 20rpx;
+  color: #888;
+  margin-top: 5rpx;
+  text-align: center;
+}
+
+.date-cell.today .lunar-text,
+.date-cell.selected .lunar-text {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* 节假日 */
+.holiday-text {
+  font-size: 20rpx;
+  color: #ff6b6b;
+  margin-top: 5rpx;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* 选中日期信息 */
+.selected-info {
+  display: flex;
+  position: relative;
+  /* top: -320rpx; */
+  background: white;
+  border-radius: 20rpx;
+  padding: 25rpx;
+  margin: 20rpx 0;
+  box-shadow: 0 5rpx 15rpx rgba(0,0,0,0.1);
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.item-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  background: white;
+  border-radius: 20rpx;
+  padding: 25rpx;
+  margin: 20rpx 0;
+  box-shadow: 0 5rpx 15rpx rgba(0,0,0,0.1);
+  gap: 10rpx;
+  
+  .del {
+	display: flex;
+	margin-left: 20rpx;
+	flex-shrink: 0;
+    // width: 60rpx;
+    // height: 60rpx;
+    // line-height: 60rpx;
+    text-align: center;
+    // border-radius: 50%;
+    // background: #ff4d4f;
+    color: red;
+    font-size: 24rpx;
+  }
+  
+}
+
+
+
+
+.info-title {
+  font-size: 28rpx;
+  color: #666;
+  font-weight: 500;
+}
+
+.info-date {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.info-lunar {
+  font-size: 26rpx;
+  color: #4a90e2;
+  margin-top: 10rpx;
+}
+
+.info-holiday {
+  font-size: 26rpx;
+  color: #ff6b6b;
+  font-weight: 500;
+}
+
+.info-solarterm {
+  font-size: 26rpx;
+  color: #34c759;
+  font-weight: 500;
+}
+
+/* 收起状态提示 */
+.collapsed-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20rpx;
+  padding: 20rpx;
+  border-top: 1rpx solid #eee;
+}
+
+.hint-text {
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 10rpx;
+}
+
+.hint-arrow {
+  font-size: 36rpx;
+  color: #4a90e2;
+  animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(5rpx);
+  }
+  60% {
+    transform: translateY(3rpx);
+  }
+}
+
+/* 提示信息 */
+.hint {
+  position: fixed;
+  top: 100rpx;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100%);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20rpx 40rpx;
+  border-radius: 50rpx;
+  font-size: 28rpx;
+  opacity: 0;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  z-index: 1000;
+  box-shadow: 0 10rpx 30rpx rgba(102, 126, 234, 0.4);
+}
+
+.hint.show-hint {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* 操作按钮 */
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+  margin-top: 20rpx;
+}
+
+.button-group {
+  display: flex;
+  gap: 20rpx;
+}
+
+.action-btn {
+  flex: 1;
+  background: white;
+  color: #333;
+  border: none;
+  border-radius: 50rpx;
+  padding: 25rpx 30rpx;
+  font-size: 28rpx;
+  box-shadow: 0 5rpx 15rpx rgba(0,0,0,0.1);
+  transition: all 0.2s;
+}
+
+.action-btn.primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.action-btn:active {
+  transform: translateY(2rpx);
+  box-shadow: 0 3rpx 10rpx rgba(0,0,0,0.2);
+}
+
+/* 日期选择器模态框 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 30rpx;
+  width: 80%;
+  max-width: 600rpx;
+  overflow: hidden;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100rpx); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.modal-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.modal-close {
+  font-size: 48rpx;
+  color: #999;
+  padding: 10rpx 20rpx;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.modal-close:active {
+  background: #f0f0f0;
+  color: #666;
+}
+
+.date-picker {
+  padding: 30rpx;
+}
+
+.picker-year {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40rpx;
+  margin-bottom: 40rpx;
+}
+
+.picker-value {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #4a90e2;
+  min-width: 200rpx;
+  text-align: center;
+}
+
+.picker-month {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20rpx;
+  margin-bottom: 40rpx;
+}
+
+.month-option {
+  padding: 25rpx 10rpx;
+  text-align: center;
+  background: #f8fafc;
+  border-radius: 15rpx;
+  font-size: 28rpx;
+  color: #333;
+  border: 2rpx solid #e2e8f0;
+  transition: all 0.2s;
+}
+
+.month-option.selected {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-color: #667eea;
+  transform: scale(1.05);
+  box-shadow: 0 5rpx 15rpx rgba(102, 126, 234, 0.3);
+}
+
+.month-option.current {
+  border-color: #4a90e2;
+  color: #4a90e2;
+  font-weight: 500;
+}
+
+.month-option:active {
+  transform: scale(0.95);
+}
+
+.confirm-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 50rpx;
+  padding: 30rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+  box-shadow: 0 10rpx 20rpx rgba(102, 126, 234, 0.3);
+  transition: all 0.2s;
+}
+
+.confirm-btn:active {
+  transform: translateY(2rpx);
+  box-shadow: 0 5rpx 10rpx rgba(102, 126, 234, 0.3);
+}
+
+/* 响应式调整 */
+@media (max-width: 750px) {
+  .year-months {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .month-display {
+    font-size: 40rpx;
+  }
+  
+  .date-number {
+    font-size: 28rpx;
+    width: 50rpx;
+    height: 50rpx;
+  }
+  
+  .button-group {
+    flex-direction: column;
+  }
+  
+  .picker-month {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+
+

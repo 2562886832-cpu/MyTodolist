@@ -1,0 +1,205 @@
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.page-container.data-v-4a9252c8 {
+  height: 100vh;
+  background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+}
+.nav-bar.data-v-4a9252c8 {
+  height: 88rpx;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32rpx;
+  border-bottom: 1rpx solid #eee;
+  flex-shrink: 0;
+}
+.nav-bar .nav-left.data-v-4a9252c8 {
+  color: #333;
+  font-size: 32rpx;
+}
+.nav-bar .nav-left .icon-back.data-v-4a9252c8 {
+  font-size: 28rpx;
+}
+.nav-bar .nav-title.data-v-4a9252c8 {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+.nav-bar .nav-right.data-v-4a9252c8 {
+  width: 100rpx;
+}
+.main-content.data-v-4a9252c8 {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.editor-container.data-v-4a9252c8 {
+  background-color: #fff;
+  margin-bottom: 20rpx;
+  border-radius: 0 0 20rpx 20rpx;
+}
+.text-input-area.data-v-4a9252c8 {
+  padding: 32rpx 32rpx 24rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+.text-input-area .post-content.data-v-4a9252c8 {
+  width: 100%;
+  font-size: 32rpx;
+  line-height: 1.6;
+  color: #333;
+}
+.text-input-area .word-count.data-v-4a9252c8 {
+  text-align: right;
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 16rpx;
+}
+.inline-image-section.data-v-4a9252c8 {
+  padding: 24rpx 32rpx 32rpx;
+}
+.inline-image-section .image-grid.data-v-4a9252c8 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+.inline-image-section .image-grid .image-item.data-v-4a9252c8 {
+  position: relative;
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 12rpx;
+  overflow: hidden;
+  background-color: #f8f8f8;
+}
+.inline-image-section .image-grid .image-item .uploaded-image.data-v-4a9252c8 {
+  width: 100%;
+  height: 100%;
+}
+.inline-image-section .image-grid .image-item .delete-btn.data-v-4a9252c8 {
+  position: absolute;
+  top: 8rpx;
+  right: 8rpx;
+  width: 36rpx;
+  height: 36rpx;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 20rpx;
+  font-weight: bold;
+}
+.inline-image-section .image-grid .add-image-btn.data-v-4a9252c8 {
+  width: 160rpx;
+  height: 160rpx;
+  background-color: #f8f8f8;
+  border: 2rpx dashed #ddd;
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.inline-image-section .image-grid .add-image-btn .plus-icon.data-v-4a9252c8 {
+  font-size: 48rpx;
+  color: #999;
+  font-weight: 300;
+}
+.inline-image-section .image-tips.data-v-4a9252c8 {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 20rpx;
+}
+.category-section.data-v-4a9252c8 {
+  background-color: #fff;
+  padding: 32rpx;
+  margin-bottom: 20rpx;
+  border-radius: 20rpx;
+}
+.category-section .section-title.data-v-4a9252c8 {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 24rpx;
+}
+.category-section .category-scroll.data-v-4a9252c8 {
+  white-space: nowrap;
+  width: 100%;
+}
+.category-section .category-scroll .category-list.data-v-4a9252c8 {
+  display: inline-flex;
+}
+.category-section .category-scroll .category-list .category-item.data-v-4a9252c8 {
+  padding: 16rpx 32rpx;
+  background-color: #f8f8f8;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  color: #666;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+.category-section .category-scroll .category-list .category-item.data-v-4a9252c8:last-child {
+  margin-right: 0;
+}
+.category-section .category-scroll .category-list .category-item.active.data-v-4a9252c8 {
+  background-color: #007aff;
+  color: #fff;
+}
+.publish-section.data-v-4a9252c8 {
+  padding: 0 32rpx 32rpx;
+}
+.publish-section .publish-btn.data-v-4a9252c8 {
+  background-color: #007aff;
+  color: #fff;
+  border-radius: 50rpx;
+  height: 88rpx;
+  font-size: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: normal;
+  font-weight: bold;
+}
+.publish-section .publish-btn.disabled.data-v-4a9252c8 {
+  background-color: #ccc;
+  color: #fff;
+}
+.publish-section .publish-btn.data-v-4a9252c8::after {
+  border: none;
+}
+.community-rules.data-v-4a9252c8 {
+  padding: 0 32rpx 40rpx;
+}
+.community-rules .rules-content.data-v-4a9252c8 {
+  font-size: 24rpx;
+  color: #999;
+  text-align: center;
+}
+.community-rules .rules-content .highlight.data-v-4a9252c8 {
+  color: #007aff;
+}
