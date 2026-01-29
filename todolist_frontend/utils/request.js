@@ -32,6 +32,12 @@ export function request(config={}){
 						showCancel:false
 					})
 					reject(res.data)
+				}else if(res.statusCode === 401){
+					uni.showToast({
+						title: 'error！请登陆！',
+						icon: 'fail'
+					})
+					reject(res.data)
 				}else{
 					uni.showToast({
 						title:res.data.errMsg,

@@ -1,4 +1,32 @@
 
+.topTitle.data-v-2b7b037f{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 32rpx;
+	color:#999;
+	background-color: #fff;
+}
+.history.data-v-2b7b037f{
+	padding: 0 50rpx;
+	background-color: #fff;
+}
+.tabs.data-v-2b7b037f{
+	display: flex;		
+	align-items: center;
+	flex-wrap: wrap;
+}
+.tab.data-v-2b7b037f{
+	background: #F4F4F4;
+	font-size: 28rpx;
+	color:#333;
+	padding:10rpx 28rpx;
+	border-radius: 50rpx;
+	margin-right: 20rpx;
+	margin-top: 20rpx;
+}
+
+
 /* 使用uniapp的安全区域CSS类 */
 .container.safe-area.data-v-2b7b037f {
   padding-bottom: constant(safe-area-inset-bottom);
@@ -36,7 +64,7 @@
 /* 分类条样式 */
 .category-scroll.data-v-2b7b037f {
   white-space: nowrap;
-  padding: 10rpx 0;
+  padding: 20rpx 50rpx;
   background-color: #ffffff;
   border-bottom: 1rpx solid #e5e5e5;
 }
@@ -196,4 +224,25 @@
   width: 50rpx;
   height: 50rpx;
   filter: brightness(0) invert(1); /* 使图标变为白色 */
+}
+.search-bar.data-v-2b7b037f {
+  padding: 0rpx 12rpx;
+  background-color: #fff;
+}
+.search-box.data-v-2b7b037f {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 15px;
+  background-color: #f8f8f8;
+  border-radius: 20px;
+}
+.search-box text.data-v-2b7b037f {
+  margin-right: 10px;
+  color: #999;
+}
+.search-box input.data-v-2b7b037f {
+  flex: 1;
+  height: 100%;
+  font-size: 15px;
 }

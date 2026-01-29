@@ -151,6 +151,10 @@
 .comment-sort {
   display: flex;
 }
+.sort-container {
+  display: flex;
+  padding: 20rpx;
+}
 .sort-item {
   font-size: 26rpx;
   color: #999;

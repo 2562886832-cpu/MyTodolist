@@ -50,8 +50,22 @@
 	  <view class="comment-header">
 	    <text class="comment-title">全部评论 ({{ totalComments }})</text>
 	    <view class="comment-sort">
-	      <text class="sort-item active">最热</text>
-	      <text class="sort-item">最新</text>
+	      <!-- <text class="sort-item active">最热</text>
+	      <text class="sort-item">最新</text> -->
+		  <view class="sort-container">
+		    <text 
+		      :class="['sort-item', activeSort === 'hot' ? 'active' : '']"
+		      @click="handleSortClick('hot')"
+		    >
+		      最热
+		    </text>
+		    <text 
+		      :class="['sort-item', activeSort === 'new' ? 'active' : '']"
+		      @click="handleSortClick('new')"
+		    >
+		      最新
+		    </text>
+		  </view>
 	    </view>
 	  </view>
 
@@ -76,7 +90,7 @@
               <text class="comment-name">{{ comment.userName }}</text>
 			  <view class="comment-like">
 			    <image 
-				  @tap.stop="handleCommentLike(comment.id, comment.likeStatus)"
+				  @tap.stop="handleCommentLike(comment)"
 			      class="comment-like-icon" 
 			      :src="comment.likeStatus ? '/static/icons/like-i.png' : '/static/icons/like-o.png'"
 			    ></image>
@@ -125,7 +139,7 @@
 					<view class="right">
 						<view class="sub-comment-like" >
 						  <image
-						    @tap.stop="handleCommentLike(reply.id, reply.likeStatus)"
+						    @tap.stop="handleCommentLike(reply)"
 						    class="comment-like-icon" 
 						    :src="reply.likeStatus ? '/static/icons/like-i.png' : '/static/icons/like-o.png'"
 						  ></image>
@@ -169,10 +183,10 @@
       
       <!-- 加载更多 -->
 	  <view class="load-more" v-if="hasMoreComments">
-        <text class="load-more-text" @tap="loadMoreComments">加载更多评论</text>
+        <text class="load-more-text" @tap="loadMoreComments">--</text>
       </view>
       <view class="no-more" v-else>
-        <text class="no-more-text">没有更多评论了</text>
+        <text class="no-more-text"></text>
       </view>
     </scroll-view>
     
@@ -210,18 +224,58 @@
 </template>
 
 <script setup>
-import { ref, reactive, computed, onMounted } from 'vue'
+import { ref, reactive, computed } from 'vue'
 import { onLoad, onReady, onShow, onReachBottom } from '@dcloudio/uni-app'
-import { apiGetTreeHoldPostComments, apiAddTreeHolePostComment, apiDelTreeHolePostComment } from '../../api/treehole.js'
+import { apiGetTreeHolePostComments, apiAddTreeHolePostComment, apiDelTreeHolePostComment, 
+		 apiTreeHoleCommentLike, apiTreeHolePostLike } from '../../api/treehole.js'
+
 
 // 响应式数据
+const activeSort = ref('hot')
+
+// 点击事件处理函数
+const handleSortClick = (type) => {
+  activeSort.value = type
+  
+  // 执行排序逻辑
+  if (type === 'hot') {
+    console.log('按最热排序')
+	RefreshData()
+	queryParams.is_new=false
+    GetTreeHoldPostComments(post_id.value)
+  } else {
+    console.log('按最新排序')
+    RefreshData()
+	
+	queryParams.is_new=true
+    GetTreeHoldPostComments(post_id.value)
+  }
+}
+
+// 加载最热数据
+const loadHotData = () => {
+  // 加载最热数据的逻辑
+  console.log('执行最热数据加载逻辑')
+  // 这里可以调用 API 或其他逻辑
+  // 例如：fetchHotList()
+}
+
+// 加载最新数据
+const loadNewData = () => {
+  // 加载最新数据的逻辑
+  console.log('执行最新数据加载逻辑')
+  // 这里可以调用 API 或其他逻辑
+  // 例如：fetchNewList()
+}
+
 const windowHeight = ref(0)
 const postSectionHeight = ref(0)
 const commentSectionHeight = ref(0)
 const queryParams = {
 		page:1,
 		pageSize:10,
-		postId:null
+		postId:null,
+		is_new:false
 	}
 
 let TreeHolePostComments = ref([])
@@ -230,7 +284,7 @@ const noData = ref(false)
 const GetTreeHoldPostComments = async(id)=>{
 		await new Promise(resolve => setTimeout(resolve, 100));
 		queryParams.postId = id;
-		let res = await apiGetTreeHoldPostComments(queryParams);
+		let res = await apiGetTreeHolePostComments(queryParams);
 		TreeHolePostComments.value = [...TreeHolePostComments.value, ...res.data.records];
 		totalComments.value = res.data.total;
 		if(queryParams.pageSize > res.data.length) noData.value = true;
@@ -530,36 +584,6 @@ const handleComment = () => {
   replyTarget.value = null
 }
 
-// 处理点赞
-const handleLike = (postId, likeStatus) => {
-  // 模拟API请求
-  if (likeStatus) {
-    post.value.likeCount--
-    post.value.likeStatus = false
-    uni.showToast({
-      title: '取消点赞',
-      icon: 'none'
-    })
-  } else {
-    post.value.likeCount++
-    post.value.likeStatus = true
-    uni.showToast({
-      title: '点赞成功',
-      icon: 'success'
-    })
-  }
-  
-  // 这里应该发送请求到后端
-  // uni.request({
-  //   url: '/api/post/like',
-  //   method: 'POST',
-  //   data: { postId, like: !likeStatus },
-  //   success: (res) => {
-  //     // 更新状态
-  //   }
-  // })
-}
-
 const showOperating = (postId, userId,content) => {
 	console.log(postId, userId, content)
 	// this.currentItem = item
@@ -604,46 +628,62 @@ const showOperating = (postId, userId,content) => {
 	})
 }
 
-// 处理评论点赞
-const handleCommentLike = (commentId, likeStatus) => {
-  console.log(commentId)
-  // 找到评论并更新
-  const updateCommentLike = (commentList) => {
-    for (let comment of commentList) {
-      if (comment.id === commentId) {
-        if (likeStatus) {
-          comment.likeCount--
-          comment.likeStatus = false
-        } else {
-          comment.likeCount++
-          comment.likeStatus = true
-        }
-        return true
-      }
-      
-      // 检查回复
-      if (comment.replies && comment.replies.length > 0) {
-        for (let reply of comment.replies) {
-          if (reply.id === commentId) {
-            if (likeStatus) {
-              reply.likeCount--
-              reply.likeStatus = false
-            } else {
-              reply.likeCount++
-              reply.likeStatus = true
-            }
-            return true
-          }
-        }
-      }
-    }
-    return false
-  }
-  
-  if (updateCommentLike(comments.value)) {
+const treeHolePostLike = async(userId, postId, like)=>{
+	let res = await apitreeHolePostLike({userId, postId, like});
+	// console.log(res.data);
+}
+// 处理点赞
+const handleLike = (postId, likeStatus) => {
+  // 模拟API请求
+  if (likeStatus) {
+    post.value.likeCount--
+    post.value.likeStatus = false
+	uni.setStorageSync('tempPostData', post.value)
+	treeHolePostLike(1, postId, -1);
     uni.showToast({
-      title: likeStatus ? '取消点赞' : '点赞成功',
+      title: '取消点赞',
       icon: 'none'
+    })
+  } else {
+    post.value.likeCount++
+    post.value.likeStatus = true
+	uni.setStorageSync('tempPostData', post.value)
+	treeHolePostLike(1, postId, 1);
+    uni.showToast({
+      title: '点赞成功',
+      icon: 'success'
+    })
+  }
+}
+
+
+const treeHoleCommentLike = async(commentId, userId, postId, like)=>{
+	let res = await apiTreeHoleCommentLike({commentId, userId, postId, like});
+	// console.log(res.data);
+}
+// 处理评论点赞
+const handleCommentLike = (comment) => {
+  const {id, likeStatus, postId} = comment
+  console.log(id, likeStatus, postId)
+  
+  
+  if (likeStatus) {
+    comment.likeCount--
+    comment.likeStatus = false
+  	// uni.setStorageSync('tempPostData', post.value)
+  	treeHoleCommentLike(id, 1, postId, -1);
+    uni.showToast({
+      title: '取消点赞',
+      icon: 'none'
+    })
+  } else {
+    comment.likeCount++
+    comment.likeStatus = true
+  	// uni.setStorageSync('tempPostData', post.value)
+  	treeHoleCommentLike(id, 1, postId, 1);
+    uni.showToast({
+      title: '点赞成功',
+      icon: 'success'
     })
   }
 }
@@ -725,6 +765,13 @@ const RefreshPage = () =>{
 	const {id} = post.value
 	
 	//数据初始化
+	RefreshData()
+	
+	GetTreeHoldPostComments(id)
+}
+
+const RefreshData = () =>{
+	//数据初始化
 	TreeHolePostComments.value = []
 	showReplyComment.value = ""
 	commentInput.value = ""
@@ -733,8 +780,6 @@ const RefreshPage = () =>{
 	queryParams.page = 1
 	queryParams.pageSize = 10
 	noData.value = false
-	
-	GetTreeHoldPostComments(id)
 }
 
 // 发送评论
@@ -835,9 +880,11 @@ const sendComment = () => {
 
 // 生命周期钩子
 const post = ref([])
+const post_id = ref();
 onLoad((options) => {
   post.value = uni.getStorageSync('tempPostData')
   const {id} = post.value
+  post_id.value = id
   GetTreeHoldPostComments(id)
   // 获取帖子ID
   // if (options.id) {
@@ -846,7 +893,7 @@ onLoad((options) => {
   // }
   
   // 初始化假评论数据
-  generateFakeComments()
+  // generateFakeComments()
 })
 
 // onReachBottom(()=>{
@@ -1014,6 +1061,11 @@ onShow(() => {
 
 .comment-sort {
   display: flex;
+}
+
+.sort-container {
+  display: flex;
+  padding: 20rpx;
 }
 
 .sort-item {

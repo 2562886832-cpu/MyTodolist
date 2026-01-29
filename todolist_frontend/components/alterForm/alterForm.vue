@@ -168,7 +168,6 @@ const resetAndClose = () => {
 
 // 如果需要，可以导出给模板使用
 defineExpose({
-  open,
   submit,
   resetAndClose
 })

@@ -66,13 +66,6 @@
 				"onReachBottomDistance": 100,
 				"navigationBarTitleText" : "帖子详情页"
 			}
-		},
-		{
-			"path" : "pages/post/search",
-			"style" : 
-			{
-				"navigationBarTitleText" : "搜索"
-			}
 		}
 	],
 	"globalStyle": {
@@ -104,11 +97,11 @@
 			{
 				"text": "我的",
 				"pagePath": "pages/mine/mine"
-			},
-			{
-				"text": "teset",
-				"pagePath": "pages/test/test"
 			}
+			// {
+			// 	"text": "teset",
+			// 	"pagePath": "pages/test/test"
+			// }
 		]
 	},
 	"uniIdRouter": {}

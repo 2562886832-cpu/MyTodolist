@@ -29,6 +29,12 @@ function request(config = {}) {
             showCancel: false
           });
           reject(res.data);
+        } else if (res.statusCode === 401) {
+          common_vendor.index.showToast({
+            title: "error！请登陆！",
+            icon: "fail"
+          });
+          reject(res.data);
         } else {
           common_vendor.index.showToast({
             title: res.data.errMsg,

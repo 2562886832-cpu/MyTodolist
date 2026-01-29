@@ -251,7 +251,6 @@ const _sfc_main = {
         columnTotal.value = total;
         columnAvg.value = total / apiData.length;
         columnMax.value = max;
-        columnWeekOpts.value.yAxis.data[0].max = max;
       } catch (error) {
         common_vendor.index.__f__("error", "at pages/data/data.vue:473", "获取柱状图数据失败:", error);
       }

@@ -3,15 +3,34 @@
 	<view class="loadingLayout" v-if="!TreeHolePostList.length && !noData">
 		<uni-load-more status="loading"></uni-load-more>
 	</view>
+	<view>
+		<text></text>
+	</view>
 	
-	<navigator url="/pages/post/search" class="search-bar">
-	      <view class="search-box">
-	        <text>🔍</text>
-	        <input
-	          placeholder="请输入关键词"
-	        />
-	      </view>
-	</navigator>
+	<view class="search-bar">
+		<uni-search-bar 
+		@confirm="onSearch"
+		@cancel="onClear"
+		@clear="onClear"
+		placeholder="搜索"
+		v-model="queryParams.content">
+		</uni-search-bar>
+	</view>
+	
+	<view>
+		<view class="history" v-if="historySearch.length">
+			<view class="topTitle">
+				<view >最近搜索</view>
+				<view class="icon" @click="removeHistory">
+					<uni-icons type="trash" size="25"></uni-icons>
+				</view>
+			</view>
+			<view class="tabs">
+				<view class="tab" v-for="tab in historySearch" :key="tab" @click="clickTab(tab)">{{tab}}</view>		
+			</view>
+		</view>
+		
+	</view>
 	
     <!-- 分类条 -->
     <scroll-view class="category-scroll" scroll-x="true">
@@ -27,7 +46,7 @@
     </scroll-view>
 
     <!-- 帖子列表 -->
-    <scroll-view class="post-list" scroll-y="true">
+    <scroll-view class="post-list" scroll-y="true" v-if="TreeHolePostList.length">
       <view class="post-item" v-for="(post, index) in TreeHolePostList" :key="index">
         <!-- 帖子头部 -->
         <view class="post-header">
@@ -100,27 +119,75 @@
 </template>
 
 <script setup>
-	import { ref, onMounted, computed } from 'vue'
+	import { ref, computed } from 'vue'
 	import { onLoad, onReachBottom,onPullDownRefresh, onShow } from '@dcloudio/uni-app'
-	import { apiGetTreeHolePost, apiTreeHoldPostLike } from '../../api/treehole'
+	import { apiGetTreeHolePost, apiTreeHolePostLike } from '../../api/treehole'
 	
-	const queryParams = {
-		page:1,
-		pageSize:10
+	
+	const searchData = async () =>{
+		queryParams.value.page = 1
+		queryParams.value.pageSize = 10
+		TreeHolePostList.value = []
+		getTreeHolePost()
 	}
+	
+	//搜索历史词
+	const historySearch = ref(uni.getStorageSync("historySearch") || []);
+	
+	//点击搜索
+	const onSearch = ()=>{
+		historySearch.value = [...new Set([queryParams.value.content,...historySearch.value])]
+		uni.setStorageSync("historySearch", historySearch.value)
+		searchData()
+	}
+	
+	//点击清除按钮
+	const onClear = ()=>{
+		TreeHolePostList.value = []
+		queryParams.value.content = ""
+		queryParams.value.page = 1
+		queryParams.value.pageSize = 10
+		noData.value = false
+		getTreeHolePost()
+	}
+	
+	//点击标签进行搜索
+	const clickTab = (value)=>{
+		console.log(value)
+		queryParams.value.content = value;
+	}
+	
+	//点击清空搜索记录
+	const removeHistory = ()=>{
+		uni.showModal({
+			title:"是否清空历史搜索？",
+			success:res=>{
+				if(res.confirm){
+					uni.removeStorageSync("historySearch")
+					historySearch.value = []
+				}
+			}
+		})
+	}
+	
+	const queryParams = ref({
+		page:1,
+		pageSize:10,
+		content:""
+	})
 	
 	const TreeHolePostList= ref([]);
 	const noData = ref(false)
 	const getTreeHolePost = async()=>{
 		// await new Promise(resolve => setTimeout(resolve, 100));
-		let res = await apiGetTreeHolePost(queryParams);
+		let res = await apiGetTreeHolePost(queryParams.value);
 		TreeHolePostList.value = [...TreeHolePostList.value, ...res.data.records];
-		if(queryParams.pageSize > res.data.records.length) noData.value = true;
+		if(queryParams.value.pageSize > res.data.records.length) noData.value = true;
 		console.log(res.data);
 	}
 	
 	const treeHoldPostLike = async(userId, postId, like)=>{
-		let res = await apiTreeHoldPostLike({userId, postId, like});
+		let res = await apiTreeHolePostLike({userId, postId, like});
 		// console.log(res.data);
 	}
 	
@@ -140,25 +207,25 @@
 	
 	// 生命周期
 	onLoad(() => {
-	  loadPosts()
+	  getTreeHolePost();
 	})
 	
-	onShow(()=>{
-		queryParams.page = 1
-		queryParams.pageSize = 10
-		TreeHolePostList.value = []
-		noData.value = false
-		getTreeHolePost();
-	})
+	// onShow(()=>{
+	// 	queryParams.value.page = 1
+	// 	queryParams.value.pageSize = 10
+	// 	TreeHolePostList.value = []
+	// 	noData.value = false
+	// 	getTreeHolePost();
+	// })
 	
 	onReachBottom(()=>{
 		if(noData.value) return;
-		queryParams.page++;
+		queryParams.value.page++;
 		getTreeHolePost();
 	})
 	
 	onPullDownRefresh(()=>{
-		queryParams.page=1
+		queryParams.value.page=1
 		noData.value=false
 		TreeHolePostList.value = []
 		getTreeHolePost().then(() => {
@@ -396,6 +463,36 @@
 </script>
 
 <style scoped>
+.topTitle{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 32rpx;
+	color:#999;
+	background-color: #fff;
+}
+.history{
+	padding: 0 50rpx;
+	background-color: #fff;
+}
+
+.tabs{
+	display: flex;		
+	align-items: center;
+	flex-wrap: wrap;
+}	
+
+.tab{
+	background: #F4F4F4;
+	font-size: 28rpx;
+	color:#333;
+	padding:10rpx 28rpx;
+	border-radius: 50rpx;
+	margin-right: 20rpx;
+	margin-top: 20rpx;
+}
+
+
 /* 使用uniapp的安全区域CSS类 */
 .container.safe-area {
   padding-bottom: constant(safe-area-inset-bottom);
@@ -435,7 +532,7 @@
 /* 分类条样式 */
 .category-scroll {
   white-space: nowrap;
-  padding: 10rpx 0;
+  padding: 20rpx 50rpx;
   background-color: #ffffff;
   border-bottom: 1rpx solid #e5e5e5;
 }
@@ -616,7 +713,7 @@
 }
 
 .search-bar {
-  padding: 12px;
+  padding: 0rpx 12rpx;
   background-color: #fff;
 }
 

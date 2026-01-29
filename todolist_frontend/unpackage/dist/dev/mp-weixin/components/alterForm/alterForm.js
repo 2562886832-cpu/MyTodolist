@@ -48,7 +48,6 @@ const _sfc_main = {
       showForm.value = false;
     };
     __expose({
-      open,
       submit,
       resetAndClose
     });

@@ -118,6 +118,26 @@ function parseStringStyle(cssText) {
   });
   return ret;
 }
+function normalizeClass(value) {
+  let res = "";
+  if (isString(value)) {
+    res = value;
+  } else if (isArray(value)) {
+    for (let i2 = 0; i2 < value.length; i2++) {
+      const normalized = normalizeClass(value[i2]);
+      if (normalized) {
+        res += normalized + " ";
+      }
+    }
+  } else if (isObject$1(value)) {
+    for (const name in value) {
+      if (value[name]) {
+        res += name + " ";
+      }
+    }
+  }
+  return res.trim();
+}
 const toDisplayString = (val) => {
   return isString(val) ? val : val == null ? "" : isArray(val) || isObject$1(val) && (val.toString === objectToString || !isFunction(val.toString)) ? JSON.stringify(val, replacer, 2) : String(val);
 };
@@ -5445,6 +5465,7 @@ const o$1 = (value, key) => vOn(value, key);
 const f$1 = (source, renderItem) => vFor(source, renderItem);
 const s$1 = (value) => stringifyStyle(value);
 const e$1 = (target, ...sources) => extend(target, ...sources);
+const n$1 = (value) => normalizeClass(value);
 const t$1 = (val) => toDisplayString(val);
 const p$1 = (props) => renderProps(props);
 const sr = (ref2, id, opts) => setRef(ref2, id, opts);
@@ -6369,7 +6390,7 @@ function populateParameters(fromRes, toRes) {
   let _SDKVersion = SDKVersion;
   const hostLanguage = (language || "").replace(/_/g, "-");
   const parameters = {
-    appId: "",
+    appId: "__UNI__6953F6B",
     appName: "todolist_frontend",
     appVersion: "1.0.0",
     appVersionCode: "100",
@@ -6518,7 +6539,7 @@ const getAppBaseInfo = {
       hostName: _hostName,
       hostSDKVersion: SDKVersion,
       hostTheme: theme,
-      appId: "",
+      appId: "__UNI__6953F6B",
       appName: "todolist_frontend",
       appVersion: "1.0.0",
       appVersionCode: "100",
@@ -7267,9 +7288,9 @@ function isConsoleWritable() {
   return isWritable;
 }
 function initRuntimeSocketService() {
-  const hosts = "192.168.157.1,192.168.83.5,192.168.119.161,127.0.0.1";
+  const hosts = "192.168.157.1,192.168.83.5,192.168.226.161,127.0.0.1";
   const port = "8090";
-  const id = "mp-weixin_l0y0Im";
+  const id = "mp-weixin_OXUdtc";
   const lazy = typeof swan !== "undefined";
   let restoreError = lazy ? () => {
   } : initOnError();
@@ -8672,7 +8693,7 @@ function T(e2) {
 const b = true, E = "mp-weixin", A = T(define_process_env_UNI_SECURE_NETWORK_CONFIG_default), P = E, C = T(""), O = T("[]") || [];
 let N = "";
 try {
-  N = "";
+  N = "__UNI__6953F6B";
 } catch (e2) {
 }
 let L = {};
@@ -11198,6 +11219,7 @@ exports.e = e$1;
 exports.f = f$1;
 exports.index = index;
 exports.initVueI18n = initVueI18n;
+exports.n = n$1;
 exports.nextTick$1 = nextTick$1;
 exports.o = o$1;
 exports.onLoad = onLoad;

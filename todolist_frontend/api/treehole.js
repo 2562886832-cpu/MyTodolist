@@ -8,7 +8,7 @@ export function apiGetTreeHolePostByUserId(data = {}){
 
 export function apiGetTreeHolePost(data = {}){
 	return request({
-		url:`/treehole/page?page=${data.page}&pageSize=${data.pageSize}`
+		url:`/treehole/page?page=${data.page}&pageSize=${data.pageSize}&content=${data.content}`
 	})	
 }
 
@@ -21,7 +21,7 @@ export function apiAddTreeHolePost(data = {}){
 	})	
 }
 
-export function apiTreeHoldPostLike(data = {}){
+export function apiTreeHolePostLike(data = {}){
 	return request({
 		url:`/treehole/like`,
 		method:"PUT",
@@ -29,9 +29,17 @@ export function apiTreeHoldPostLike(data = {}){
 	})	
 }
 
-export function apiGetTreeHoldPostComments(data = {}){
+export function apiTreeHoleCommentLike(data = {}){
 	return request({
-		url:`/treehole/page/comments/${data.postId}?page=${data.page}&pageSize=${data.pageSize}`
+		url:`/treehole-comment/like`,
+		method:"PUT",
+		data:data
+	})	
+}
+
+export function apiGetTreeHolePostComments(data = {}){
+	return request({
+		url:`/treehole/page/comments/${data.postId}?page=${data.page}&pageSize=${data.pageSize}&is_new=${data.is_new}`
 	})	
 }
 

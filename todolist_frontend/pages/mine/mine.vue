@@ -358,12 +358,12 @@ const handleLogin = () => {
 	              // 调用接口请求openid
 	              apiGetUserOpenId(userInfo).then((res) => {
 					  isLoggedIn.value = true;
-					  getTreeHolePost()
 					  
 					  uni.setStorageSync('token', res.data.token); // 根据你的API返回字段调整
 					  uni.setStorageSync('openId', res.openId); // 存储openId
 					  
-					  // saveLoginStatus()
+					  getTreeHolePost()
+					  saveLoginStatus()
 					  uni.showToast({
 					  	title: '登录成功',
 					  	icon: 'success'
@@ -542,7 +542,7 @@ const showLogoutConfirm = () => {
 const handleLogoutConfirm = async () => {
 	try {
 		// 清除登录状态
-		// clearLoginStatus()
+		clearLoginStatus()
 		uni.removeStorageSync('token')
 		
 		// 重置状态

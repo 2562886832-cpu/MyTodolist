@@ -7,7 +7,7 @@ function apiGetTreeHolePostByUserId(data = {}) {
 }
 function apiGetTreeHolePost(data = {}) {
   return utils_request.request({
-    url: `/treehole/page?page=${data.page}&pageSize=${data.pageSize}`
+    url: `/treehole/page?page=${data.page}&pageSize=${data.pageSize}&content=${data.content}`
   });
 }
 function apiAddTreeHolePost(data = {}) {
@@ -17,16 +17,23 @@ function apiAddTreeHolePost(data = {}) {
     data
   });
 }
-function apiTreeHoldPostLike(data = {}) {
+function apiTreeHolePostLike(data = {}) {
   return utils_request.request({
     url: `/treehole/like`,
     method: "PUT",
     data
   });
 }
-function apiGetTreeHoldPostComments(data = {}) {
+function apiTreeHoleCommentLike(data = {}) {
   return utils_request.request({
-    url: `/treehole/page/comments/${data.postId}?page=${data.page}&pageSize=${data.pageSize}`
+    url: `/treehole-comment/like`,
+    method: "PUT",
+    data
+  });
+}
+function apiGetTreeHolePostComments(data = {}) {
+  return utils_request.request({
+    url: `/treehole/page/comments/${data.postId}?page=${data.page}&pageSize=${data.pageSize}&is_new=${data.is_new}`
   });
 }
 function apiAddTreeHolePostComment(data = {}) {
@@ -45,8 +52,9 @@ function apiDelTreeHolePostComment(commentId) {
 exports.apiAddTreeHolePost = apiAddTreeHolePost;
 exports.apiAddTreeHolePostComment = apiAddTreeHolePostComment;
 exports.apiDelTreeHolePostComment = apiDelTreeHolePostComment;
-exports.apiGetTreeHoldPostComments = apiGetTreeHoldPostComments;
 exports.apiGetTreeHolePost = apiGetTreeHolePost;
 exports.apiGetTreeHolePostByUserId = apiGetTreeHolePostByUserId;
-exports.apiTreeHoldPostLike = apiTreeHoldPostLike;
+exports.apiGetTreeHolePostComments = apiGetTreeHolePostComments;
+exports.apiTreeHoleCommentLike = apiTreeHoleCommentLike;
+exports.apiTreeHolePostLike = apiTreeHolePostLike;
 //# sourceMappingURL=../../.sourcemap/mp-weixin/api/treehole.js.map

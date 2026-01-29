@@ -1,6 +1,6 @@
 {
   "navigationBarTitleText": "test",
   "usingComponents": {
-    "qiun-data-charts": "../../uni_modules/qiun-data-charts/components/qiun-data-charts/qiun-data-charts"
+    "uni-icons": "../../uni_modules/uni-icons/components/uni-icons/uni-icons"
   }
 }

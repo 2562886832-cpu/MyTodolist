@@ -3,10 +3,14 @@ const common_vendor = require("../../common/vendor.js");
 const common_assets = require("../../common/assets.js");
 const api_mine = require("../../api/mine.js");
 if (!Array) {
-  const _component_uni_icons = common_vendor.resolveComponent("uni-icons");
+  const _easycom_uni_icons2 = common_vendor.resolveComponent("uni-icons");
   const _component_uni_popup_dialog = common_vendor.resolveComponent("uni-popup-dialog");
   const _component_uni_popup = common_vendor.resolveComponent("uni-popup");
-  (_component_uni_icons + _component_uni_popup_dialog + _component_uni_popup)();
+  (_easycom_uni_icons2 + _component_uni_popup_dialog + _component_uni_popup)();
+}
+const _easycom_uni_icons = () => "../../uni_modules/uni-icons/components/uni-icons/uni-icons.js";
+if (!Math) {
+  _easycom_uni_icons();
 }
 const STORAGE_KEY = "user_login_status";
 const USER_INFO_KEY = "user_info";
@@ -66,6 +70,15 @@ const _sfc_main = {
         common_vendor.index.__f__("error", "at pages/mine/mine.vue:302", "保存登录状态失败:", error);
       }
     };
+    const clearLoginStatus = () => {
+      try {
+        common_vendor.index.removeStorageSync(STORAGE_KEY);
+        common_vendor.index.removeStorageSync(USER_INFO_KEY);
+        common_vendor.index.__f__("log", "at pages/mine/mine.vue:312", "登录状态已清除");
+      } catch (error) {
+        common_vendor.index.__f__("error", "at pages/mine/mine.vue:314", "清除登录状态失败:", error);
+      }
+    };
     const generateUUID = () => {
       const hexStr = "xxxxxxxxxxxx".replace(/x/g, () => {
         const r = Math.random() * 16 | 0;
@@ -91,9 +104,10 @@ const _sfc_main = {
                   };
                   api_mine.apiGetUserOpenId(userInfo).then((res2) => {
                     isLoggedIn.value = true;
-                    getTreeHolePost();
                     common_vendor.index.setStorageSync("token", res2.data.token);
                     common_vendor.index.setStorageSync("openId", res2.openId);
+                    getTreeHolePost();
+                    saveLoginStatus();
                     common_vendor.index.showToast({
                       title: "登录成功",
                       icon: "success"
@@ -220,6 +234,7 @@ const _sfc_main = {
     };
     const handleLogoutConfirm = async () => {
       try {
+        clearLoginStatus();
         common_vendor.index.removeStorageSync("token");
         isLoggedIn.value = false;
         common_vendor.index.showToast({

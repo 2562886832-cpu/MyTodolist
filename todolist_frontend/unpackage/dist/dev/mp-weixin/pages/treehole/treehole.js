@@ -4,30 +4,70 @@ const common_assets = require("../../common/assets.js");
 const api_treehole = require("../../api/treehole.js");
 if (!Array) {
   const _easycom_uni_load_more2 = common_vendor.resolveComponent("uni-load-more");
-  _easycom_uni_load_more2();
+  const _easycom_uni_search_bar2 = common_vendor.resolveComponent("uni-search-bar");
+  const _easycom_uni_icons2 = common_vendor.resolveComponent("uni-icons");
+  (_easycom_uni_load_more2 + _easycom_uni_search_bar2 + _easycom_uni_icons2)();
 }
 const _easycom_uni_load_more = () => "../../uni_modules/uni-load-more/components/uni-load-more/uni-load-more.js";
+const _easycom_uni_search_bar = () => "../../uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar.js";
+const _easycom_uni_icons = () => "../../uni_modules/uni-icons/components/uni-icons/uni-icons.js";
 if (!Math) {
-  _easycom_uni_load_more();
+  (_easycom_uni_load_more + _easycom_uni_search_bar + _easycom_uni_icons)();
 }
 const _sfc_main = {
   __name: "treehole",
   setup(__props, { expose: __expose }) {
-    const queryParams = {
-      page: 1,
-      pageSize: 10
+    const searchData = async () => {
+      queryParams.value.page = 1;
+      queryParams.value.pageSize = 10;
+      TreeHolePostList.value = [];
+      getTreeHolePost();
     };
+    const historySearch = common_vendor.ref(common_vendor.index.getStorageSync("historySearch") || []);
+    const onSearch = () => {
+      historySearch.value = [.../* @__PURE__ */ new Set([queryParams.value.content, ...historySearch.value])];
+      common_vendor.index.setStorageSync("historySearch", historySearch.value);
+      searchData();
+    };
+    const onClear = () => {
+      TreeHolePostList.value = [];
+      queryParams.value.content = "";
+      queryParams.value.page = 1;
+      queryParams.value.pageSize = 10;
+      noData.value = false;
+      getTreeHolePost();
+    };
+    const clickTab = (value) => {
+      common_vendor.index.__f__("log", "at pages/treehole/treehole.vue:156", value);
+      queryParams.value.content = value;
+    };
+    const removeHistory = () => {
+      common_vendor.index.showModal({
+        title: "是否清空历史搜索？",
+        success: (res) => {
+          if (res.confirm) {
+            common_vendor.index.removeStorageSync("historySearch");
+            historySearch.value = [];
+          }
+        }
+      });
+    };
+    const queryParams = common_vendor.ref({
+      page: 1,
+      pageSize: 10,
+      content: ""
+    });
     const TreeHolePostList = common_vendor.ref([]);
     const noData = common_vendor.ref(false);
     const getTreeHolePost = async () => {
-      let res = await api_treehole.apiGetTreeHolePost(queryParams);
+      let res = await api_treehole.apiGetTreeHolePost(queryParams.value);
       TreeHolePostList.value = [...TreeHolePostList.value, ...res.data.records];
-      if (queryParams.pageSize > res.data.records.length)
+      if (queryParams.value.pageSize > res.data.records.length)
         noData.value = true;
-      common_vendor.index.__f__("log", "at pages/treehole/treehole.vue:109", res.data);
+      common_vendor.index.__f__("log", "at pages/treehole/treehole.vue:186", res.data);
     };
     const treeHoldPostLike = async (userId, postId, like) => {
-      await api_treehole.apiTreeHoldPostLike({ userId, postId, like });
+      await api_treehole.apiTreeHolePostLike({ userId, postId, like });
     };
     const activeCategory = common_vendor.ref(0);
     const categories = common_vendor.ref(["全部", "热门", "推荐", "科技", "生活", "美食", "旅行", "影视"]);
@@ -36,23 +76,16 @@ const _sfc_main = {
     const page = common_vendor.ref(1);
     common_vendor.ref({});
     common_vendor.onLoad(() => {
-      loadPosts();
-    });
-    common_vendor.onShow(() => {
-      queryParams.page = 1;
-      queryParams.pageSize = 10;
-      TreeHolePostList.value = [];
-      noData.value = false;
       getTreeHolePost();
     });
     common_vendor.onReachBottom(() => {
       if (noData.value)
         return;
-      queryParams.page++;
+      queryParams.value.page++;
       getTreeHolePost();
     });
     common_vendor.onPullDownRefresh(() => {
-      queryParams.page = 1;
+      queryParams.value.page = 1;
       noData.value = false;
       TreeHolePostList.value = [];
       getTreeHolePost().then(() => {
@@ -149,10 +182,10 @@ const _sfc_main = {
       common_vendor.index.navigateTo({
         url: "/pages/post/postDetail",
         success: () => {
-          common_vendor.index.__f__("log", "at pages/treehole/treehole.vue:268", "跳转到帖子详情页");
+          common_vendor.index.__f__("log", "at pages/treehole/treehole.vue:345", "跳转到帖子详情页");
         },
         fail: (err) => {
-          common_vendor.index.__f__("log", "at pages/treehole/treehole.vue:271", "跳转失败:", err);
+          common_vendor.index.__f__("log", "at pages/treehole/treehole.vue:348", "跳转失败:", err);
           common_vendor.index.showToast({
             title: "发布页面暂未开发完成",
             icon: "none"
@@ -181,10 +214,10 @@ const _sfc_main = {
       common_vendor.index.navigateTo({
         url: "/pages/post/create",
         success: () => {
-          common_vendor.index.__f__("log", "at pages/treehole/treehole.vue:314", "跳转到发布页面");
+          common_vendor.index.__f__("log", "at pages/treehole/treehole.vue:391", "跳转到发布页面");
         },
         fail: (err) => {
-          common_vendor.index.__f__("log", "at pages/treehole/treehole.vue:317", "跳转失败:", err);
+          common_vendor.index.__f__("log", "at pages/treehole/treehole.vue:394", "跳转失败:", err);
           common_vendor.index.showToast({
             title: "发布页面暂未开发完成",
             icon: "none"
@@ -250,7 +283,30 @@ const _sfc_main = {
           status: "loading"
         })
       } : {}, {
-        c: common_vendor.f(categories.value, (item, index, i0) => {
+        c: common_vendor.o(onSearch),
+        d: common_vendor.o(onClear),
+        e: common_vendor.o(onClear),
+        f: common_vendor.o(($event) => queryParams.value.content = $event),
+        g: common_vendor.p({
+          placeholder: "搜索",
+          modelValue: queryParams.value.content
+        }),
+        h: historySearch.value.length
+      }, historySearch.value.length ? {
+        i: common_vendor.p({
+          type: "trash",
+          size: "25"
+        }),
+        j: common_vendor.o(removeHistory),
+        k: common_vendor.f(historySearch.value, (tab, k0, i0) => {
+          return {
+            a: common_vendor.t(tab),
+            b: tab,
+            c: common_vendor.o(($event) => clickTab(tab), tab)
+          };
+        })
+      } : {}, {
+        l: common_vendor.f(categories.value, (item, index, i0) => {
           return {
             a: common_vendor.t(item),
             b: index,
@@ -258,7 +314,9 @@ const _sfc_main = {
             d: common_vendor.o(($event) => switchCategory(index), index)
           };
         }),
-        d: common_vendor.f(TreeHolePostList.value, (post, index, i0) => {
+        m: TreeHolePostList.value.length
+      }, TreeHolePostList.value.length ? {
+        n: common_vendor.f(TreeHolePostList.value, (post, index, i0) => {
           return common_vendor.e({
             a: post.avatar,
             b: common_vendor.t(post.userName),
@@ -285,15 +343,16 @@ const _sfc_main = {
             o: index
           });
         }),
-        e: common_assets._imports_0$1,
-        f: common_assets._imports_1,
-        g: TreeHolePostList.value.length || noData.value
+        o: common_assets._imports_0$1,
+        p: common_assets._imports_1
+      } : {}, {
+        q: TreeHolePostList.value.length || noData.value
       }, TreeHolePostList.value.length || noData.value ? {
-        h: common_vendor.p({
+        r: common_vendor.p({
           status: noData.value ? "noMore" : "loading"
         })
       } : {}, {
-        i: common_vendor.o(gotoPublish)
+        s: common_vendor.o(gotoPublish)
       });
     };
   }
